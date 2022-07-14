@@ -1,4 +1,4 @@
-import type { GetStaticProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 
 const Home: NextPage = () => {
   return (
@@ -9,12 +9,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-export const getStaticProps: GetStaticProps = () => {
-  return {
-    redirect: {
-      destination: '/login',
-      permanent: true
-    }
-  };
-};
