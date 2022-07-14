@@ -7,8 +7,8 @@ interface Props {
 
 const AuthLayout: React.FC<Props> = ({ children }) => {
   return (
-    <section className="min-h-screen container grid md:grid-cols-5">
-      <div className=" hidden md:flex flex-col overflow-hidden col-span-5 gap-5 md:col-span-3 py-20">
+    <section className="min-h-screen container grid md:grid-cols-5 py-5">
+      <div className=" hidden md:flex flex-col overflow-hidden col-span-5 gap-5 md:col-span-3 py-20 bg-[#FBEFFF]">
         <div className="lg:mb-10 flex justify-start relative w-full pl-8  xl:pl-28">
           <div className="relative w-[150px] h-[80px] xl:w-[200px] xl:h-[100px]">
             <Image layout="fill" src="/static/images/logo.svg" alt="logo" />
