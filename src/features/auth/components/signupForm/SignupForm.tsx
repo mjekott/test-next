@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { FaRegUser } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import { MdArrowRightAlt } from 'react-icons/md';
 import { useMutation } from 'react-query';
@@ -11,21 +12,25 @@ import { toast } from 'react-toastify';
 import Button from '@/components/button/Button';
 import Input from '@/components/Input/Input';
 import PasswordInput from '@/components/Input/PasswordInput';
-import { loginSchema } from '../../models/schema';
-import { loginUserFn } from '../../services/authService';
-import { ILoginData } from '../../types';
+import { registerSchema } from '../../models/schema';
+import { signUpUserFn } from '../../services/authService';
+import { ISingupData } from '../../types';
+import PasswordRequirement from '../passwordRequirement/PasswordRequirement';
 
-const LoginForm = () => {
+const SignupForm = () => {
   const router = useRouter();
-  const methods = useForm<ILoginData>({
-    resolver: zodResolver(loginSchema),
+  const methods = useForm<ISingupData>({
+    resolver: zodResolver(registerSchema),
     mode: 'onChange'
   });
 
   const { mutate, isLoading } = useMutation(
-    (userData: ILoginData) => loginUserFn(userData),
+    (userData: ISingupData) => signUpUserFn(userData),
     {
       onSuccess() {
+        toast.success('Registration Successfull', {
+          position: 'top-right'
+        });
         reset();
         router.push('/interest');
       },
@@ -37,13 +42,15 @@ const LoginForm = () => {
     }
   );
 
-  const onSubmitHandler: SubmitHandler<ILoginData> = values => {
+  const onSubmitHandler: SubmitHandler<ISingupData> = values => {
+    //  Execute the Mutation
     mutate(values);
   };
 
   const {
     reset,
     register,
+    watch,
     handleSubmit,
     formState: { errors }
   } = methods;
@@ -51,20 +58,27 @@ const LoginForm = () => {
   return (
     <div className="flex h-full flex-col items-center justify-center">
       <div className="relative mb-5 h-12 w-full md:hidden">
-        <Image
-          priority
-          layout="fill"
-          src="/static/images/logo.svg"
-          alt="logo"
-        />
+        <Image layout="fill" src="/static/images/logo.svg" alt="logo" />
       </div>
-      <h3 className="mb-5 text-xl font-medium md:mb-[60px] md:text-3xl">
-        I Have an account
+      <h3 className=" mb-5 text-xl font-medium md:mb-[60px] md:text-3xl">
+        Get me onboarded!
       </h3>
       <form
         onSubmit={handleSubmit(onSubmitHandler)}
         className="grid w-full max-w-sm gap-7"
       >
+        <Input
+          placeholder="Enter your firstname"
+          StartIcon={FaRegUser}
+          {...register('firstName')}
+          error={errors.firstName?.message}
+        />
+        <Input
+          placeholder="Enter your lastname"
+          StartIcon={FaRegUser}
+          {...register('lastName')}
+          error={errors.lastName?.message}
+        />
         <Input
           placeholder="Enter your email"
           StartIcon={HiOutlineMail}
@@ -76,16 +90,16 @@ const LoginForm = () => {
           {...register('password')}
           error={errors.password?.message}
         />
+        <PasswordRequirement password={watch('password')} />
         <div>
-          <Button block loading={isLoading} disabled={isLoading}>
-            Log me in <MdArrowRightAlt />
+          <Button type="submit" block loading={isLoading} disabled={isLoading}>
+            Get me onboarded <MdArrowRightAlt />
           </Button>
         </div>
-
         <div>
-          <Link href="/signup" passHref>
-            <Button as="a" variant="text" block>
-              Get me onboarded <MdArrowRightAlt />
+          <Link href="/login" passHref>
+            <Button type="button" as="a" variant="text" block>
+              I already have an account <MdArrowRightAlt />
             </Button>
           </Link>
         </div>
@@ -94,4 +108,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

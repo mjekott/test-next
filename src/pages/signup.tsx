@@ -1,5 +1,7 @@
 import AuthLayout from '@/components/layout/authLayout/AuthLayout';
-import SignupForm from 'src/features/auth/components/SignupForm';
+import { GetServerSideProps } from 'next';
+import requireNotAuthenticated from 'src/features/auth/helpers/requireNotAuthenticated';
+import SignupForm from '../features/auth/components/signupForm/SignupForm';
 import { NextPageWithLayout } from './page';
 
 const Signup: NextPageWithLayout = () => {
@@ -9,3 +11,11 @@ const Signup: NextPageWithLayout = () => {
 export default Signup;
 
 Signup.getLayout = page => <AuthLayout>{page}</AuthLayout>;
+
+export const getServerSideProps: GetServerSideProps = requireNotAuthenticated(
+  async () => {
+    return {
+      props: {}
+    };
+  }
+);

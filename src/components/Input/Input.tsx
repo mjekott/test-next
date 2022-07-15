@@ -15,7 +15,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const defaultStyles =
-  'w-full text-sm border px-5 rounded-lg shadow-sm py-4 outline-none focus:ring-brand-800 focus:ring  border-gray-300 ';
+  'w-full text-sm border px-5 rounded-lg shadow-sm py-4 outline-none focus:ring-brand-800 focus:ring  border-gray-300 appearance-none ';
 const errorStyles =
   'text-red-500 border-red-500 bg-red-100 placeholder:text-red-500';
 const activeStyle =
@@ -63,7 +63,7 @@ const Input = forwardRef(
 
           <div className="relative">
             {StartIcon && (
-              <span className="absolute inset-y-0 inline-flex items-center left-4">
+              <span className="absolute inset-y-0 left-4 inline-flex items-center">
                 {
                   <StartIcon
                     className={clsx(
@@ -85,13 +85,13 @@ const Input = forwardRef(
               className={overrideTailwindClasses(
                 `${defaultStyles} ${error && errorStyles} ${
                   isActive && activeStyle
-                } ${StartIcon && startIconStye} ${EndIcon && endIconStyle}`
+                } ${StartIcon && startIconStye} ${EndIcon && endIconStyle} `
               )}
               {...props}
             />
 
             {EndIcon && (
-              <span className="absolute inset-y-0 inline-flex items-center right-4">
+              <span className="absolute inset-y-0 right-4 inline-flex items-center">
                 {
                   <EndIcon
                     className={clsx(
@@ -105,7 +105,7 @@ const Input = forwardRef(
             )}
           </div>
         </div>
-        {error && <span className="text-red-500 text-sm">{error}</span>}
+        {error && <span className="text-sm text-red-500">{error}</span>}
       </div>
     );
   }

@@ -1,4 +1,5 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
+import requireNotAuthenticated from 'src/features/auth/helpers/requireNotAuthenticated';
 
 const Home: NextPage = () => {
   return (
@@ -9,3 +10,11 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps: GetServerSideProps = requireNotAuthenticated(
+  async () => {
+    return {
+      props: {}
+    };
+  }
+);
