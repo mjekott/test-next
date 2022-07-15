@@ -51,7 +51,7 @@ const PasswordInput = forwardRef(
           </label>
 
           <div className="relative">
-            <span className="absolute inset-y-0 inline-flex items-center left-4">
+            <span className="absolute inset-y-0 left-4 inline-flex items-center">
               <FiLock
                 className={clsx(
                   `${isActive && 'text-brand-900'}`,
@@ -74,7 +74,7 @@ const PasswordInput = forwardRef(
               )}
               {...props}
             />
-            <span className="absolute inset-y-0 inline-flex items-center right-4">
+            <span className="absolute inset-y-0 right-4 inline-flex items-center">
               {hide ? (
                 <FiEye
                   onClick={toggleType}
@@ -97,7 +97,7 @@ const PasswordInput = forwardRef(
             </span>
           </div>
         </div>
-        {error && <span className="text-red-500 text-sm">{error}</span>}
+        {error && <span className="text-sm text-red-500">{error}</span>}
       </div>
     );
   }

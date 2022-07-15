@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from 'next';
-import requireNotAuthenticated from 'src/features/auth/helpers/requireNotAuthenticated';
+import requireNotAuthenticated from '../features/auth/helpers/requireNotAuthenticated';
 
 const Home: NextPage = () => {
   return (
