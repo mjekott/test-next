@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}'
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     screens: {
       xs: '375px',
@@ -12,7 +9,19 @@ module.exports = {
       lg: '1200px',
       xl: '1440px'
     },
-    extend: {}
+    extend: {
+      container: {
+        center: true,
+        padding: '1rem'
+      },
+      colors: {
+        'brand-900': '#620083',
+        'brand-800': '#9900CC'
+      }
+    }
   },
-  plugins: []
+  plugins: [
+    require('tailwind-scrollbar'),
+    require('prettier-plugin-tailwindcss')
+  ]
 };
